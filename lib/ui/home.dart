@@ -31,6 +31,7 @@ class _HomeState extends State<Home> {
     _getWeatherData();
     super.initState();
   }
+
   final Shader linearGradient = const LinearGradient(
     colors: <Color>[Color(0xffABCFF2), Color(0xff9AC6F3)],
   ).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
@@ -64,7 +65,9 @@ class _HomeState extends State<Home> {
                   'assets/pin.png',
                   width: 35,
                 ),
-                const SizedBox(width: 0),// buraya dropdown koyulacak koyulan dropdown sabit bir label olacak o label ile seçim ekranına gidilecek
+                const SizedBox(
+                    width:
+                        0), // buraya dropdown koyulacak koyulan dropdown sabit bir label olacak o label ile seçim ekranına gidilecek
                 // seçim ekranında seçilen şehirler Home ekranında görünecek dropdowm dan da geçiş sağlanacak
                 //sabıt bir de anlık konum acılacak eğer konum kapalıysa otomatık istanbul ayarlanacak
                 //Ekstradan eğer konum kapalıysa pop up şeklinde uyarıya bakılacak
@@ -119,11 +122,10 @@ class _HomeState extends State<Home> {
                           borderRadius: BorderRadius.circular(15),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.5),
-                              offset: const Offset(0, 25), // Gölgenin konumu
-                              blurRadius: 10, // Gölgenin yayılması
-                              spreadRadius: -12
-                            ),
+                                color: Colors.black.withOpacity(0.5),
+                                offset: const Offset(0, 25), // Gölgenin konumu
+                                blurRadius: 10, // Gölgenin yayılması
+                                spreadRadius: -12),
                           ],
                         ),
                         child: Stack(
@@ -132,15 +134,17 @@ class _HomeState extends State<Home> {
                             Positioned(
                                 top: -40,
                                 left: 20,
-                                child: Image.network(weather.ikon, width: 150)
-                            ),
+                                child: Image.network(weather.ikon, width: 150)),
                             Positioned(
-                                bottom: 30,
-                                left: 20,
-                                child: Text("${weather.durum.toUpperCase()}", style: const TextStyle(
+                              bottom: 30,
+                              left: 20,
+                              child: Text(
+                                "${weather.durum.toUpperCase()}",
+                                style: const TextStyle(
                                   color: Colors.white,
-                                fontSize: 20,
-                                ),),
+                                  fontSize: 20,
+                                ),
+                              ),
                             ),
                             Positioned(
                                 top: 20,
@@ -153,14 +157,12 @@ class _HomeState extends State<Home> {
                                       child: Text(
                                         "${double.parse(weather.derece).toInt()}°", // Tam sayı olarak yazdırma
                                         style: TextStyle(
-                                          fontSize: 80,
-                                          fontWeight: FontWeight.bold,
-                                          foreground: Paint()..shader = linearGradient
-                                        ),
+                                            fontSize: 80,
+                                            fontWeight: FontWeight.bold,
+                                            foreground: Paint()
+                                              ..shader = linearGradient),
                                       ),
                                     ),
-
-
                                   ],
                                 ))
                           ],
@@ -176,9 +178,12 @@ class _HomeState extends State<Home> {
                           children: [
                             Column(
                               children: [
-                                const Text('Rqüzgar',style: TextStyle(
-                                  color: Colors.black54,
-                                ),),
+                                const Text(
+                                  'Rqüzgar',
+                                  style: TextStyle(
+                                    color: Colors.black54,
+                                  ),
+                                ),
                                 const SizedBox(
                                   height: 8,
                                 ),
@@ -188,16 +193,20 @@ class _HomeState extends State<Home> {
                                   width: 60,
                                   decoration: BoxDecoration(
                                     color: Color(0xffE0E8Fb),
-                                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
                                   ),
                                   child: Image.asset('assets/windsock.png'),
                                 ),
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                Text("km/s", style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),)// Apı rüzgar hızını desteklemiyor
+                                Text(
+                                  "km/s",
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ) // Apı rüzgar hızını desteklemiyor
                               ],
                             ),
                           ],
@@ -209,14 +218,7 @@ class _HomeState extends State<Home> {
                         height: 120,
                       ),
 
-                      /////dk 51 de kaldım onu ayarlama lazım
-
-
-
-
-
-
-
+                      /////dk 51 de kaldım onu ayarlama lazım d
 
                       /*Image.network(weather.ikon, width: 100),
                       Padding(
@@ -239,7 +241,6 @@ class _HomeState extends State<Home> {
                       ),*/
 
                       const SizedBox(height: 10),*/
-
                     ],
                   );
                 },
