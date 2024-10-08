@@ -176,39 +176,9 @@ class _HomeState extends State<Home> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Column(
-                              children: [
-                                const Text(
-                                  'Rqüzgar',
-                                  style: TextStyle(
-                                    color: Colors.black54,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(10.0),
-                                  height: 60,
-                                  width: 60,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffE0E8Fb),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15)),
-                                  ),
-                                  child: Image.asset('assets/windsock.png'),
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  "km/s",
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ) // Apı rüzgar hızını desteklemiyor
-                              ],
-                            ),
+                            weatherItem(value: weather.max, text: 'Max', unit: 'C', imageUrl: 'assets/thermometer-plus.png',),
+                            weatherItem(value: weather.min, text: 'Min', unit: 'C', imageUrl: 'assets/thermometer.png',),
+                            weatherItem(value: weather.nem, text: 'Nem', unit: '', imageUrl: 'assets/humidity.png',),
                           ],
                         ),
                       ),
@@ -219,6 +189,7 @@ class _HomeState extends State<Home> {
                       ),
 
                       /////dk 51 de kaldım onu ayarlama lazım d
+
 
                       /*Image.network(weather.ikon, width: 100),
                       Padding(
@@ -241,6 +212,9 @@ class _HomeState extends State<Home> {
                       ),*/
 
                       const SizedBox(height: 10),*/
+
+
+
                     ],
                   );
                 },
@@ -249,6 +223,55 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class weatherItem extends StatelessWidget {
+   weatherItem({
+    Key? key,
+    required this.value,required this.text,required this.unit,required this.imageUrl,
+  }) : super(key:key);
+
+  final String value;
+  final String text;
+  final String unit;
+  final String imageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+         Text(
+          text , // değişcek
+          style: TextStyle(
+            color: Colors.black54,
+          ),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        Container(
+          padding: const EdgeInsets.all(10.0),
+          height: 60,
+          width: 60,
+          decoration: BoxDecoration(
+            color: Color(0xffE0E8Fb),
+            borderRadius:
+            BorderRadius.all(Radius.circular(15)),
+          ),
+          child: Image.asset(imageUrl), // değişecek
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        Text(value.toString() +
+          unit,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ) // Apı rüzgar hızını desteklemiyor
+      ],
     );
   }
 }
