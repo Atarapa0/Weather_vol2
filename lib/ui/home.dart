@@ -3,6 +3,7 @@ import 'package:weather_vol2/models/weather_model.dart';
 import 'package:weather_vol2/models/weather_services.dart';
 
 import 'package:weather_vol2/models/constants.dart';
+import 'package:weather_vol2/widgets/weather_item.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,12 +18,8 @@ class _HomeState extends State<Home> {
   Constants myConstants = Constants();
 
   void _getWeatherData() async {
-    try {
       _weathers = await WeatherServices().getWeatherData();
       _city = await WeatherServices().getLocation(); // Şehir adını al
-    } catch (e) {
-      print(e);
-    }
     setState(() {});
   }
 
@@ -67,7 +64,7 @@ class _HomeState extends State<Home> {
                 ),
                 const SizedBox(
                     width:
-                        0), // buraya dropdown koyulacak koyulan dropdown sabit bir label olacak o label ile seçim ekranına gidilecek
+                    0), // buraya dropdown koyulacak koyulan dropdown sabit bir label olacak o label ile seçim ekranına gidilecek
                 // seçim ekranında seçilen şehirler Home ekranında görünecek dropdowm dan da geçiş sağlanacak
                 //sabıt bir de anlık konum acılacak eğer konum kapalıysa otomatık istanbul ayarlanacak
                 //Ekstradan eğer konum kapalıysa pop up şeklinde uyarıya bakılacak
@@ -91,7 +88,7 @@ class _HomeState extends State<Home> {
             // Weather verilerini listeleyelim
             Expanded(
               child: ListView.builder(
-                itemCount: _weathers.length, // Liste uzunluğu
+                itemCount: 1, // Liste uzunluğu
                 itemBuilder: (context, index) {
                   final weather = _weathers[index];
                   return Column(
@@ -185,36 +182,68 @@ class _HomeState extends State<Home> {
 
                       //iki container i ayırmaya yarıyor
                       const SizedBox(
-                        height: 120,
-                      ),
+                        height: 20,
+                      ),SizedBox(
+                        height: 150,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _weathers.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            String today = DateTime.now().toString().substring(0, 10);
+                            var selectedDay = _weathers[index];//['applicable_date'];
 
-                      /////dk 51 de kaldım onu ayarlama lazım d
+                            //var parsedDate = DateTime.parse(_weathers.toString()[index]);//['applicable_date']);
+                            //var newDate = DateFormat('EEEE').format(parsedDate).substring(0, 3); // Formatted date
 
-
-                      /*Image.network(weather.ikon, width: 100),
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Text(
-                          "${weather.durum.toUpperCase()} \n ${weather.derece}°",
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87),
+                            return GestureDetector(
+                              onTap: (){
+                                print(index);
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(vertical: 20),
+                                margin: const EdgeInsets.only(right: 20, bottom: 10, top: 10),
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  color: selectedDay == today ? myConstants.primaryColor : Colors.white,
+                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: const Offset(0, 1),
+                                      blurRadius: 5,
+                                      color: selectedDay == today ? myConstants.primaryColor : Colors.black54.withOpacity(.2),
+                                    )
+                                  ],
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    // Temperature display
+                                    Text(
+                                      double.parse(_weathers[index].derece).toString() + "°",
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        color: selectedDay == today ? Colors.white : myConstants.primaryColor,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    // Weather icon
+                                    Image.network(_weathers[index].ikon, width: 30),
+                                    // Formatted date
+                                    Text(
+                                      _weathers[index].gun,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: selectedDay == today ? Colors.white : myConstants.primaryColor,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                      ),
-                      /*Text(
-                        "Sıcaklık: ${weather.degree}°C", // Sıcaklık verisi
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 16.0,
-                        ),
-                      ),*/
-
-                      const SizedBox(height: 10),*/
-
-
-
+                      )
                     ],
                   );
                 },
@@ -223,55 +252,6 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class weatherItem extends StatelessWidget {
-   weatherItem({
-    Key? key,
-    required this.value,required this.text,required this.unit,required this.imageUrl,
-  }) : super(key:key);
-
-  final String value;
-  final String text;
-  final String unit;
-  final String imageUrl;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-         Text(
-          text , // değişcek
-          style: TextStyle(
-            color: Colors.black54,
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        Container(
-          padding: const EdgeInsets.all(10.0),
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-            color: Color(0xffE0E8Fb),
-            borderRadius:
-            BorderRadius.all(Radius.circular(15)),
-          ),
-          child: Image.asset(imageUrl), // değişecek
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        Text(value.toString() +
-          unit,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ) // Apı rüzgar hızını desteklemiyor
-      ],
     );
   }
 }
