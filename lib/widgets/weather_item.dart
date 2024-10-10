@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class weatherItem extends StatelessWidget {
-  const weatherItem({
+class WeatherItem extends StatelessWidget {
+  const WeatherItem({
     super.key,
     required this.value,required this.text,required this.unit,required this.imageUrl,
   });

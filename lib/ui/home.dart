@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:weather_vol2/models/weather_model.dart';
 import 'package:weather_vol2/models/weather_services.dart';
-
 import 'package:weather_vol2/models/constants.dart';
 import 'package:weather_vol2/widgets/weather_item.dart';
 
@@ -17,6 +17,55 @@ class _HomeState extends State<Home> {
   String _city = '';
   bool _isloading = true; // Yükleme durumu bayrağı
   Constants myConstants = Constants();
+  @override
+  void initState() {
+    super.initState();
+    _checkLocationPermission();
+    _getWeatherData();
+  }
+  Future<void> _checkLocationPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      // Konum izni yoksa
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Kullanıcı konum iznini reddetti
+        _showLocationDisabledDialog();
+      }
+    } else if (permission == LocationPermission.deniedForever) {
+      // Kullanıcı konum iznini kalıcı olarak reddetti
+      _showLocationDisabledDialog();
+    } else {
+      // Konum izni mevcut
+      _getCurrentLocation();
+    }
+  }
+  void _showLocationDisabledDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Konum Kapalı'),
+          content: const Text('Lütfen konum hizmetlerini açın.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Tamam'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+  void _getCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    // Konum bilgilerini kullan
+    print('Konum: ${position.latitude}, ${position.longitude}');
+    _getWeatherData();
+  }
 
   void _getWeatherData() async {
     _weathers = await WeatherServices().getWeatherData();
@@ -25,13 +74,6 @@ class _HomeState extends State<Home> {
       _isloading = false; // Veriler yüklendiğinde yükleme bayrağı kapatılır
     });
   }
-
-  @override
-  void initState() {
-    _getWeatherData();
-    super.initState();
-  }
-
   final Shader linearGradient = const LinearGradient(
     colors: <Color>[Color(0xffABCFF2), Color(0xff9AC6F3)],
   ).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
@@ -79,12 +121,13 @@ class _HomeState extends State<Home> {
         ),
         body: const Center(
           child:
-              CircularProgressIndicator(), // Burada dönen bir yüklenme göstergesi var
+
+              CircularProgressIndicator(),
+          // Burada dönen bir yüklenme göstergesi var
           // Eğer metin istiyorsan bunun yerine Text('Yükleniyor...') yazabilirsin
         ),
       );
     }
-
     // Veriler geldikten sonra gösterilecek asıl ekran
     return Scaffold(
       appBar: AppBar(
@@ -112,7 +155,8 @@ class _HomeState extends State<Home> {
                   'assets/pin.png',
                   width: 35,
                 ),
-                const SizedBox(width: 0),
+                const SizedBox(width: 4),
+                //dropbar gelecek buraya
               ]),
             ],
           ),
@@ -139,14 +183,14 @@ class _HomeState extends State<Home> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${weather.gun}",
+                        _weathers[index].gun,
                         style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 16.0,
                         ),
                       ),
                       Text(
-                        "${weather.tarih}",
+                        _weathers[index].tarih,
                         style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 16.0,
@@ -180,7 +224,7 @@ class _HomeState extends State<Home> {
                               bottom: 30,
                               left: 20,
                               child: Text(
-                                "${weather.durum.toUpperCase()}",
+                                _weathers[index].durum.toUpperCase(),
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -217,19 +261,19 @@ class _HomeState extends State<Home> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            weatherItem(
+                            WeatherItem(
                               value: weather.max,
                               text: 'Max',
                               unit: 'C',
                               imageUrl: 'assets/thermometer-plus.png',
                             ),
-                            weatherItem(
+                            WeatherItem(
                               value: weather.min,
                               text: 'Min',
                               unit: 'C',
                               imageUrl: 'assets/thermometer.png',
                             ),
-                            weatherItem(
+                            WeatherItem(
                               value: weather.nem,
                               text: 'Nem',
                               unit: '',
@@ -245,13 +289,9 @@ class _HomeState extends State<Home> {
                           scrollDirection: Axis.horizontal,
                           itemCount: _weathers.length,
                           itemBuilder: (BuildContext context, int index) {
-                            String today =
-                                DateTime.now().toString().substring(0, 10);
-                            var selectedDay = _weathers[index];
+                            String today = DateTime.now().toString().substring(0, 10);
+                            String selectedDay = _weathers[index].tarih;
                             return GestureDetector(
-                              onTap: () {
-                                print(index);
-                              },
                               child: Container(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 20),
@@ -279,9 +319,7 @@ class _HomeState extends State<Home> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      double.parse(_weathers[index].derece)
-                                              .toString() +
-                                          "°",
+                                      "${double.parse(_weathers[index].derece)}°",
                                       style: TextStyle(
                                         fontSize: 17,
                                         color: selectedDay == today

@@ -28,9 +28,6 @@ class WeatherServices {
       desiredAccuracy: LocationAccuracy.high,
     );
 
-    // Pozisyon bilgilerini logda gösterelim
-    //print('Latitude: ${position.latitude}, Longitude: ${position.longitude}');
-
     // Kullanıcının pozisyonunda yerleşim noktasını bulduk
     final List<Placemark> placemark = await placemarkFromCoordinates(
       position.latitude,
