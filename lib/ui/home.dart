@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:weather_vol2/models/weather_model.dart';
 import 'package:weather_vol2/models/weather_services.dart';
 import 'package:weather_vol2/models/constants.dart';
+import 'package:weather_vol2/ui/detail_page.dart';
 import 'package:weather_vol2/widgets/weather_item.dart';
 
 class Home extends StatefulWidget {
@@ -264,13 +265,13 @@ class _HomeState extends State<Home> {
                             WeatherItem(
                               value: weather.max,
                               text: 'Max',
-                              unit: 'C',
+                              unit: '°',
                               imageUrl: 'assets/thermometer-plus.png',
                             ),
                             WeatherItem(
                               value: weather.min,
                               text: 'Min',
-                              unit: 'C',
+                              unit: '°',
                               imageUrl: 'assets/thermometer.png',
                             ),
                             WeatherItem(
@@ -291,7 +292,17 @@ class _HomeState extends State<Home> {
                           itemBuilder: (BuildContext context, int index) {
                             String today = DateTime.now().toString().substring(0, 10);
                             String selectedDay = _weathers[index].tarih;
+                            //String selectedDays=_weathers[index].gun;
                             return GestureDetector(
+                              onTap: (){
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context)=>
+                                        DetailPage( // Seçilen hava durumu detayları
+                                          city: _city,                     // Şehir adı
+                                          detailindex: index,
+                                          weatherDetail: _weathers,) // Gün bilgisi),
+                                    ));
+                              },
                               child: Container(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 20),
