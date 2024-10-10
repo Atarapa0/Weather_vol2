@@ -9,8 +9,8 @@ class WeatherModel {
   final String gece;
   final String nem;
 
-  WeatherModel(this.gun, this.tarih, this.ikon, this.durum, this.derece, this.min, this.max,
-      this.gece, this.nem);
+  WeatherModel(this.gun, this.tarih, this.ikon, this.durum, this.derece,
+      this.min, this.max, this.gece, this.nem);
 
   WeatherModel.fromJson(Map<String, dynamic> json)
       : gun = json['day'],

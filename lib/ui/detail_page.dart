@@ -251,16 +251,12 @@ class _DetailPageState extends State<DetailPage> {
                         child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           itemCount: widget.weatherDetail.length,
-                          itemBuilder:
-                              (BuildContext context, int index) {
+                          itemBuilder: (BuildContext context, int index) {
                             String selectedDay =
                                 widget.weatherDetail[index].tarih;
                             return Container(
                               margin: const EdgeInsets.only(
-                                  left: 10,
-                                  right: 10,
-                                  top: 10,
-                                  bottom: 5),
+                                  left: 10, right: 10, top: 10, bottom: 5),
                               height: 80,
                               width: size.width,
                               decoration: BoxDecoration(
@@ -280,9 +276,8 @@ class _DetailPageState extends State<DetailPage> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.center,
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
                                       selectedDay,
@@ -319,15 +314,13 @@ class _DetailPageState extends State<DetailPage> {
                                     ),
                                     Column(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                       children: [
                                         Image.network(
-                                          widget.weatherDetail[index]
-                                              .ikon,
+                                          widget.weatherDetail[index].ikon,
                                           width: 30,
                                         ),
-                                        Text(widget
-                                            .weatherDetail[index].durum
+                                        Text(widget.weatherDetail[index].durum
                                             .toUpperCase())
                                       ],
                                     ),

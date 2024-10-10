@@ -24,6 +24,7 @@ class _HomeState extends State<Home> {
     _checkLocationPermission();
     _getWeatherData();
   }
+
   Future<void> _checkLocationPermission() async {
     LocationPermission permission = await Geolocator.checkPermission();
 
@@ -42,6 +43,7 @@ class _HomeState extends State<Home> {
       _getCurrentLocation();
     }
   }
+
   void _showLocationDisabledDialog() {
     showDialog(
       context: context,
@@ -61,8 +63,10 @@ class _HomeState extends State<Home> {
       },
     );
   }
+
   void _getCurrentLocation() async {
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
     // Konum bilgilerini kullan
     print('Konum: ${position.latitude}, ${position.longitude}');
     _getWeatherData();
@@ -75,6 +79,7 @@ class _HomeState extends State<Home> {
       _isloading = false; // Veriler yüklendiğinde yükleme bayrağı kapatılır
     });
   }
+
   final Shader linearGradient = const LinearGradient(
     colors: <Color>[Color(0xffABCFF2), Color(0xff9AC6F3)],
   ).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
@@ -121,9 +126,7 @@ class _HomeState extends State<Home> {
           ),
         ),
         body: const Center(
-          child:
-
-              CircularProgressIndicator(),
+          child: CircularProgressIndicator(),
           // Burada dönen bir yüklenme göstergesi var
           // Eğer metin istiyorsan bunun yerine Text('Yükleniyor...') yazabilirsin
         ),
@@ -290,18 +293,21 @@ class _HomeState extends State<Home> {
                           scrollDirection: Axis.horizontal,
                           itemCount: _weathers.length,
                           itemBuilder: (BuildContext context, int index) {
-                            String today = DateTime.now().toString().substring(0, 10);
+                            String today =
+                                DateTime.now().toString().substring(0, 10);
                             String selectedDay = _weathers[index].tarih;
-                            //String selectedDays=_weathers[index].gun;
                             return GestureDetector(
-                              onTap: (){
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context)=>
-                                        DetailPage( // Seçilen hava durumu detayları
-                                          city: _city,                     // Şehir adı
-                                          detailindex: index,
-                                          weatherDetail: _weathers,) // Gün bilgisi),
-                                    ));
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailPage(
+                                              // Seçilen hava durumu detayları
+                                              city: _city, // Şehir adı
+                                              detailindex: index,
+                                              weatherDetail: _weathers,
+                                            ) // Gün bilgisi),
+                                        ));
                               },
                               child: Container(
                                 padding:
