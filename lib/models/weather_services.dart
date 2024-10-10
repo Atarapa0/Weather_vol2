@@ -29,7 +29,7 @@ class WeatherServices {
     );
 
     // Pozisyon bilgilerini logda gösterelim
-    print('Latitude: ${position.latitude}, Longitude: ${position.longitude}');
+    //print('Latitude: ${position.latitude}, Longitude: ${position.longitude}');
 
     // Kullanıcının pozisyonunda yerleşim noktasını bulduk
     final List<Placemark> placemark = await placemarkFromCoordinates(
