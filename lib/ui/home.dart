@@ -180,7 +180,7 @@ class _HomeState extends State<Home> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 1, // Liste uzunluğu
+                itemCount: 1,
                 itemBuilder: (context, index) {
                   final weather = _weathers[index];
                   return Column(

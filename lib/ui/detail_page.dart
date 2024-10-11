@@ -31,6 +31,8 @@ class _DetailPageState extends State<DetailPage> {
 
     int selectedIndex = widget.detailindex;
 
+
+
     return Scaffold(
       backgroundColor: myConstants.secondaryColor,
       appBar: AppBar(
@@ -63,51 +65,65 @@ class _DetailPageState extends State<DetailPage> {
                     scrollDirection: Axis.horizontal,
                     itemCount: widget.weatherDetail.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        margin: const EdgeInsets.only(right: 20),
-                        width: 80,
-                        decoration: BoxDecoration(
-                            color: index == selectedIndex
-                                ? Colors.white
-                                : const Color(0xff9ebcf9),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: const Offset(0, 1),
-                                blurRadius: 5,
-                                color: Colors.white.withOpacity(.3),
-                              )
-                            ]),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '${widget.weatherDetail[index].derece}°C',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: index == selectedIndex
-                                    ? Colors.blue
-                                    : Colors.white,
-                                fontWeight: FontWeight.w500,
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DetailPage(
+                                    // Seçilen hava durumu detayları
+                                    city: widget.city, // Şehir adı
+                                    detailindex: index,
+                                    weatherDetail: widget.weatherDetail,
+                                  ) // Gün bilgisi),
+                              ));
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          margin: const EdgeInsets.only(right: 20),
+                          width: 80,
+                          decoration: BoxDecoration(
+                              color: index == selectedIndex
+                                  ? Colors.white
+                                  : const Color(0xff9ebcf9),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: const Offset(0, 1),
+                                  blurRadius: 5,
+                                  color: Colors.white.withOpacity(.3),
+                                )
+                              ]),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                '${widget.weatherDetail[index].derece}°C',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: index == selectedIndex
+                                      ? Colors.blue
+                                      : Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            Image.network(
-                              widget.weatherDetail[index].ikon,
-                              width: 40,
-                            ),
-                            Text(
-                              widget.weatherDetail[index].gun,
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: index == selectedIndex
-                                    ? Colors.blue
-                                    : Colors.white,
-                                fontWeight: FontWeight.w500,
+                              Image.network(
+                                widget.weatherDetail[index].ikon,
+                                width: 40,
                               ),
-                            ),
-                          ],
+                              Text(
+                                widget.weatherDetail[index].gun,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: index == selectedIndex
+                                      ? Colors.blue
+                                      : Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     }),
@@ -247,77 +263,91 @@ class _DetailPageState extends State<DetailPage> {
                           itemBuilder: (BuildContext context, int index) {
                             String selectedDay =
                                 widget.weatherDetail[index].tarih;
-                            return Container(
-                              margin: const EdgeInsets.only(
-                                  left: 10, right: 10, top: 10, bottom: 5),
-                              height: 80,
-                              width: size.width,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(10)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: myConstants.secondaryColor
-                                          .withOpacity(.1),
-                                      spreadRadius: 5,
-                                      blurRadius: 20,
-                                      offset: const Offset(0, 3),
-                                    )
-                                  ]),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      selectedDay,
-                                      style: const TextStyle(
-                                        color: Color(0xff6696f5),
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailPage(
+                                          // Seçilen hava durumu detayları
+                                          city: widget.city, // Şehir adı
+                                          detailindex: index,
+                                          weatherDetail: widget.weatherDetail,
+                                        ) // Gün bilgisi),
+                                    ));
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 10, bottom: 5),
+                                height: 80,
+                                width: size.width,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(10)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: myConstants.secondaryColor
+                                            .withOpacity(.1),
+                                        spreadRadius: 5,
+                                        blurRadius: 20,
+                                        offset: const Offset(0, 3),
+                                      )
+                                    ]),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        selectedDay,
+                                        style: const TextStyle(
+                                          color: Color(0xff6696f5),
+                                        ),
                                       ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "${double.parse(widget.weatherDetail[selectedIndex].max).toInt()}°",
-                                          style: const TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600,
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "${double.parse(widget.weatherDetail[selectedIndex].max).toInt()}°",
+                                            style: const TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
-                                        ),
-                                        const Text(
-                                          '/',
-                                          style: TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600,
+                                          const Text(
+                                            '/',
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
-                                        ),
-                                        Text(
-                                          "${double.parse(widget.weatherDetail[selectedIndex].min).toInt()}°",
-                                          style: const TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 20,
+                                          Text(
+                                            "${double.parse(widget.weatherDetail[selectedIndex].min).toInt()}°",
+                                            style: const TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 20,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Image.network(
-                                          widget.weatherDetail[index].ikon,
-                                          width: 30,
-                                        ),
-                                        Text(widget.weatherDetail[index].durum
-                                            .toUpperCase())
-                                      ],
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.network(
+                                            widget.weatherDetail[index].ikon,
+                                            width: 30,
+                                          ),
+                                          Text(widget.weatherDetail[index].durum
+                                              .toUpperCase())
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );
