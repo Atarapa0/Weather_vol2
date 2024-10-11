@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-//import 'package:intl/intl.dart';
-import 'package:weather_vol2/models/constants.dart';
-import 'package:weather_vol2/models/weather_model.dart';
-import 'package:weather_vol2/ui/home.dart';
-import 'package:weather_vol2/widgets/weather_item.dart';
+import 'package:weather_App/models/constants.dart';
+import 'package:weather_App/models/weather_model.dart';
+import 'package:weather_App/widgets/weather_item.dart';
 
 class DetailPage extends StatefulWidget {
   final String city;
@@ -41,18 +39,13 @@ class _DetailPageState extends State<DetailPage> {
         elevation: 0.0,
         title: Text(widget.city), //
 
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: EdgeInsets.only(right: 8.0),
             child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const Home())); // home yerine dropbar sayfasına eklenecek
-                },
-                icon: const Icon(Icons.settings)),
+              icon: Icon(Icons.settings),
+              onPressed: null, // No functionality
+            ),
           )
         ],
       ),

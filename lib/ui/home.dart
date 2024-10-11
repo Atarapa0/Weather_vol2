@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:weather_vol2/models/weather_model.dart';
-import 'package:weather_vol2/models/weather_services.dart';
-import 'package:weather_vol2/models/constants.dart';
-import 'package:weather_vol2/ui/detail_page.dart';
-import 'package:weather_vol2/widgets/weather_item.dart';
+import 'package:weather_App/models/weather_model.dart';
+import 'package:weather_App/models/weather_services.dart';
+import 'package:weather_App/models/constants.dart';
+import 'package:weather_App/ui/detail_page.dart';
+import 'package:weather_App/widgets/weather_item.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -118,7 +118,7 @@ class _HomeState extends State<Home> {
                       'assets/pin.png',
                       width: 35,
                     ),
-                    const SizedBox(width: 0),
+                    const SizedBox(width: 4),
                   ],
                 ),
               ],

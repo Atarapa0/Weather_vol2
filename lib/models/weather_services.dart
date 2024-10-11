@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:weather_vol2/models/weather_model.dart';
+import 'package:weather_App/models/weather_model.dart';
 
 class WeatherServices {
   Future<String> getLocation() async {
@@ -35,7 +35,7 @@ class WeatherServices {
     );
 
     // Yerleşim noktasını aldık
-    print(placemark);
+    //print(placemark);
 
     // Şehrimizi aldık (administrativeArea'yı city olarak alıyoruz)
     final String? city = placemark[0].administrativeArea;
