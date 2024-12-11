@@ -2,15 +2,14 @@
 
 A new Weather application vol.2 Flutter project.
 
-## Getting Started
+Hello everyone! I’d like to share the weather application I developed using Flutter. 🌤️ The app fetches real-time weather data through API integration and presents it with a user-friendly interface. 📊 Key features include:
+Live weather updates: Displays maximum and minimum temperatures, humidity levels, and weather descriptions.
+Weekly forecast: Provides a graphical representation of the upcoming days’ weather conditions.
+Theme customization: Designed with a modern and aesthetic look, utilizing the flexibility of Flutter widgets.
+This small project was a great opportunity to enhance my Flutter skills while highlighting the importance of customization and functionality in app design. 🚀 Up next, I plan to develop another weather app with different features and designs! 🌍 This will allow me to explore new approaches and further refine my expertise in Flutter.
+If you have any questions or suggestions, I’d be happy to hear them! 😊
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+# First weather mobile application project
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# My project images
