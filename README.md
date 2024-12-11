@@ -15,3 +15,7 @@ If you have any questions or suggestions, I’d be happy to hear them! 😊
 # My project images
 <img width="357" alt="Ekran Resmi 2024-12-11 21 17 56" src="https://github.com/user-attachments/assets/6245d8de-7caa-40a1-bf7a-30a101a92a13" />
 <img width="362" alt="Ekran Resmi 2024-12-11 21 18 10" src="https://github.com/user-attachments/assets/d97c08be-93b1-4b3d-ae7f-244dd72a046b" />
+## Kurulum
+
+1. `.env.example` dosyasını `.env` olarak kopyalayın
+2. Kendi API anahtarlarınızı ve diğer gizli bilgileri doldurun
