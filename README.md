@@ -13,3 +13,5 @@ If you have any questions or suggestions, I’d be happy to hear them! 😊
 # First weather mobile application project
 
 # My project images
+![Ekran Resmi 2024-12-11 21.17.56.png](../../../Desktop/Ekran%20Resmi%202024-12-11%2021.17.56.png)
+![Ekran Resmi 2024-12-11 21.18.10.png](../../../Desktop/Ekran%20Resmi%202024-12-11%2021.18.10.png)
